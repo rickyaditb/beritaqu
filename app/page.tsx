@@ -1,9 +1,10 @@
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Card from "./components/Card";
+import { getNews } from "../utils/database";
 
-
-export default function Home() {
+export default async function Home() {
+  const news = await getNews();
   return (
     <div className="container max-w-7xl mx-auto mt-5 w-full px-5">
       <Header />
