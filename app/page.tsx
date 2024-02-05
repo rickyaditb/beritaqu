@@ -19,7 +19,7 @@ export default async function Home() {
                 title={item.title}
                 time={item.time}
                 category={item.category}
-                publisher={item.publisher}
+                source={item.source}
                 image={item.image}
               />
             ))}
