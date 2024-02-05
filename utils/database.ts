@@ -10,7 +10,7 @@ const pool = new Pool({
 
 export async function getNews() {
   try {
-    const result = await pool.query('SELECT * FROM news');
+    const result = await pool.query('SELECT * FROM news ORDER BY id DESC');
     return result.rows;
   } catch (err) {
     console.error(err);
