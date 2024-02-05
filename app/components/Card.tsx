@@ -1,14 +1,7 @@
 import { FaGlobe, FaRegCalendarAlt } from "react-icons/fa";
+import { NewsItem } from "@/utils/types";
 
-interface CardProps {
-  title: string;
-  time: Date;
-  category: string;
-  publisher: string;
-  image: string;
-}
-
-export default function Card({ title, time, category, publisher, image}: CardProps) {
+export default function Card({ title, time, category, publisher, image}: NewsItem) {
   const formattedDate = time.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric'});
   return (
     <article className="effect">
