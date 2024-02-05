@@ -2,13 +2,14 @@ import { FaGlobe, FaRegCalendarAlt } from "react-icons/fa";
 
 interface CardProps {
   title: string;
-  date: string;
+  time: Date;
   category: string;
   publisher: string;
   image: string;
 }
 
-export default function Card({ title, date, category, publisher, image}: CardProps) {
+export default function Card({ title, time, category, publisher, image}: CardProps) {
+  const formattedDate = time.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric'});
   return (
     <article className="effect">
       <div className="group bg-cover bg-center bg-no-repeat relative rounded-t-lg p-5" style={{ backgroundImage: `linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0) 25%), url('${image}')`, height: "250px" }}>
@@ -19,11 +20,11 @@ export default function Card({ title, date, category, publisher, image}: CardPro
         <div className="grid grid-cols-2 text-xl mt-1.5 gap-5">
           <div className="flex items-center">
             <FaRegCalendarAlt className="text-xl mr-2" />
-            <p className="truncate">{date}</p>
+            <p className="truncate">{formattedDate}</p>
           </div>
           <div className="flex items-center">
             <FaGlobe className="text-xl mr-2" />
-            <p>{category}</p>
+            <p>Teknologi</p>
           </div>
         </div>
       </div>
