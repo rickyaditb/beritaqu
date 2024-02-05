@@ -17,3 +17,39 @@ body {
   -webkit-box-orient: vertical;  
   overflow: hidden;
 }
+
+.Antara {
+  @apply bg-pink-500;
+}
+
+.CNN {
+  @apply bg-red-500;
+}
+
+.CNBC {
+  @apply bg-blue-500;
+}
+
+.Republika {
+  @apply bg-green-500;
+}
+
+.Okezone {
+  @apply bg-yellow-500;
+}
+
+.Kumparan {
+  @apply bg-purple-500;
+}
+
+.Vice {
+  @apply bg-gray-500;
+}
+
+.Suara {
+  @apply bg-rose-500;
+}
+
+.VOA {
+  @apply bg-orange-500;
+}
