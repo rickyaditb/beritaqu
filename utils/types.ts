@@ -3,5 +3,6 @@ export interface NewsItem {
   time: Date;
   category: string;
   source: string;
+  sentiment: string;
   image: string;
 }

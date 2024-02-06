@@ -20,6 +20,7 @@ export default async function Home() {
                 time={item.time}
                 category={item.category}
                 source={item.source}
+                sentiment={item.sentiment}
                 image={item.image}
               />
             ))}
