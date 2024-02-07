@@ -13,9 +13,10 @@ export default async function Home() {
         <Sidebar />
         <main className="col-span-6 lg:col-span-5 lg:pl-5">
           <div className="grid md:grid-cols-2 gap-5">
-            {news.slice(0, 10).map((item: NewsItem, index: number) => (
+            {news.slice(0, 10).map((item: NewsItem) => (
               <Card
-                key={index}
+                key={item.id}
+                id={item.id}
                 title={item.title}
                 time={item.time}
                 category={item.category}
