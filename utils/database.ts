@@ -21,6 +21,10 @@ export async function getNews() {
 export async function getNewsById(id: number) {
   try {
     const result = await pool.query('SELECT * FROM news WHERE id = $1', [id]);
+    result.rows[0]['summary'] = result.rows[0]['summary'].split('\n')
+      .filter((line: string) => /^-/.test(line))
+      .map((line: string) => line.replace(/\*/g, ''))
+      .map((line: string) => line.replace(/^- /, ''));
     return result.rows[0];
   } catch (err) {
     console.error(err);

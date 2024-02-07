@@ -30,7 +30,14 @@ export default async function page({ params }: { params: NewsItem }) {
                 </div>
                 <div className="mt-5">
                   <h2 className="font-semibold text-xl mb-2">Rangkuman Berita</h2>
-                  <p>{news.summary}</p>
+                  {news.summary.map((summaryItem: string, index: number) => (
+                    <div key={index} className="flex gap-2 mt-3">
+                      <div>
+                        <span className="bg-primary px-2 py-1 text-white font-bold rounded">{index + 1}</span>
+                      </div>
+                      <p>{summaryItem}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
