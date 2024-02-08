@@ -1,5 +1,5 @@
 import Header from "@/app/components/Header";
-import Sidebar from "@/app/components/Sidebar";
+import Sidebar from "./Sidebar";
 import { getNewsById } from "@/utils/database";
 
 import { NewsItem } from "@/utils/types";
@@ -12,7 +12,7 @@ export default async function page({ params }: { params: NewsItem }) {
     <div className="container max-w-7xl mx-auto mt-5 w-full px-5">
       <Header />
       <div className="grid grid-cols-6">
-        <Sidebar />
+        <Sidebar source={news.source} category={news.category} sentiment={news.sentiment} />
         <main className="col-span-6 lg:col-span-5 lg:pl-5">
           <div className="grid grid-cols-12 gap-5">
             <div className="col-span-12 md:col-span-7 order-2 md:order-1">
