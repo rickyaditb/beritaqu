@@ -3,11 +3,13 @@ import Sidebar from "./Sidebar";
 import { getNewsById } from "@/utils/database";
 
 import { NewsItem } from "@/utils/types";
-import { FaBookmark, FaExternalLinkAlt, FaGlobe, FaRegCalendarAlt } from "react-icons/fa";
+import { FaBookmark, FaExternalLinkAlt, FaGlobe, FaMeh, FaRegCalendarAlt, FaSadTear, FaSmileBeam, FaTags } from "react-icons/fa";
 
 export default async function page({ params }: { params: NewsItem }) {
   const news = await getNewsById(params.id);
   const formattedDate = news.time.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+  const shortDate = news.time.toLocaleDateString('id-ID', { day: 'numeric', month: 'long' });
+  const parsedSentiment = parseFloat(news.sentiment);
   return (
     <div className="container max-w-7xl mx-auto mt-5 w-full px-5">
       <Header />
@@ -45,15 +47,47 @@ export default async function page({ params }: { params: NewsItem }) {
               <div className="effect p-2 rounded">
                 <img src={news.image} alt="" className="rounded" />
               </div>
-              <div className="flex gap-4 mt-4">
-                <button className="bg-primary px-4 py-3 text-white font-bold text-2xl flex items-center gap-3 rounded w-full justify-center">
+              <div className="flex gap-4 mt-4 text-2xl md:text-xl lg:text-2xl">
+                <button className="bg-primary px-4 py-3 text-white font-bold flex items-center gap-3 rounded w-full justify-center">
                   <FaExternalLinkAlt />
                   <span>Sumber</span>
                 </button>
-                <button className="bg-primary px-4 py-3 text-white font-bold text-2xl flex items-center gap-3 rounded w-full justify-center">
+                <button className="bg-primary px-4 py-3 text-white font-bold flex items-center gap-3 rounded w-full justify-center">
                   <FaBookmark />
                   <span>Simpan</span>
                 </button>
+              </div>
+              <div className="grid md:hidden grid-cols-2 gap-3 mt-3">
+                <div className="effect p-4 flex items-center gap-3">
+                  <FaGlobe className="text-4xl bg-primary p-2 rounded text-white shrink-0" />
+                  <p className="text-secondary text-xl xl:text-2xl font-semibold">{news.source}</p>
+                </div>
+                <div className="effect p-4 flex items-center gap-3">
+                  <FaTags className="text-4xl bg-blue-400 p-2 rounded text-white shrink-0" />
+                  <p className="text-secondary text-xl xl:text-2xl font-semibold">{news.category}</p>
+                </div>
+                {parsedSentiment > 0 && (
+                  <div className="effect p-4 flex items-center gap-3">
+                    <FaSmileBeam className="text-4xl bg-green-400 p-2 rounded text-white shrink-0" />
+                    <p className="text-secondary text-xl xl:text-2xl font-semibold">Positif</p>
+                  </div>
+                )}
+                {parsedSentiment === 0 && (
+                  <div className="effect p-4 flex items-center gap-3">
+                    <FaMeh className="text-4xl bg-gray-400 p-2 rounded text-white" />
+                    <p className="text-secondary text-2xl font-semibold">Netral</p>
+                  </div>
+                )}
+                {parsedSentiment < 0 && (
+                  <div className="effect p-4 flex items-center gap-3">
+                    <FaSadTear className="text-4xl bg-red-400 p-2 rounded text-white" />
+                    <p className="text-secondary text-2xl font-semibold">Negatif</p>
+                  </div>
+                )}
+                <div className="effect p-4 flex items-center gap-3">
+                  <FaGlobe className="text-4xl bg-primary p-2 rounded text-white shrink-0" />
+                  <p className="text-secondary text-xl xl:text-2xl font-semibold truncate">{shortDate}</p>
+                </div>
               </div>
             </div>
           </div>
