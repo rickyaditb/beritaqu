@@ -8,9 +8,12 @@ const pool = new Pool({
   port: process.env.DB_PORT,
 });
 
-export async function getNews() {
+export async function getNews(page: number) {
+  const limit = 10; // number of records per page
+  const offset = (page - 1) * limit; // calculate offset
+
   try {
-    const result = await pool.query('SELECT * FROM news ORDER BY id DESC');
+    const result = await pool.query('SELECT * FROM news ORDER BY id DESC LIMIT $1 OFFSET $2', [limit, offset]);
     return result.rows;
   } catch (err) {
     console.error(err);
