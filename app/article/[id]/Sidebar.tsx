@@ -7,22 +7,22 @@ export default function Sidebar({ source, category, sentiment }: { source: strin
   return (
     <aside className="hidden lg:block">
       <div className="flex flex-col gap-3">
-        <Link href={"/"} className="effect p-4 text-2xl text-secondary font-semibold flex items-center justify-center gap-2">
+        <Link href={"/"} className="effect p-4 text-xl xl:text-2xl text-secondary font-semibold flex items-center justify-center gap-2">
           <FaChevronLeft />
           <span>Kembali</span>
         </Link>
         <div className="effect p-4 flex items-center gap-3">
-          <FaGlobe className="text-4xl bg-primary p-2 rounded text-white" />
-          <p className="text-secondary text-2xl font-semibold">{source}</p>
+          <FaGlobe className="text-4xl bg-primary p-2 rounded text-white shrink-0" />
+          <p className="text-secondary text-xl xl:text-2xl font-semibold">{source}</p>
         </div>
         <div className="effect p-4 flex items-center gap-3">
-          <FaTags className="text-4xl bg-blue-400 p-2 rounded text-white" />
-          <p className="text-secondary text-2xl font-semibold">{category}</p>
+          <FaTags className="text-4xl bg-blue-400 p-2 rounded text-white shrink-0" />
+          <p className="text-secondary text-xl xl:text-2xl font-semibold">{category}</p>
         </div>
         {parsedSentiment > 0 && (
           <div className="effect p-4 flex items-center gap-3">
-            <FaSmileBeam className="text-4xl bg-green-400 p-2 rounded text-white" />
-            <p className="text-secondary text-2xl font-semibold">Positif</p>
+            <FaSmileBeam className="text-4xl bg-green-400 p-2 rounded text-white shrink-0" />
+            <p className="text-secondary text-xl xl:text-2xl font-semibold">Positif</p>
           </div>
         )}
         {parsedSentiment === 0 && (
