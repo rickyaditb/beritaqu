@@ -34,3 +34,19 @@ export async function getNewsById(id: number) {
     throw err;
   }
 }
+
+export async function searchNews(title: string, page: number) {
+  const limit = 10; // number of records per page
+  const offset = (page - 1) * limit; // calculate offset
+
+  try {
+    const result = await pool.query(
+      'SELECT * FROM news WHERE title ILIKE $1 ORDER BY id DESC LIMIT $2 OFFSET $3',
+      [`%${title}%`, limit, offset]
+    );
+    return result.rows;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}

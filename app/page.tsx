@@ -1,14 +1,19 @@
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Card from "./components/Card";
-import { getNews } from "../utils/database";
+import { getNews, searchNews } from "../utils/database";
 import { NewsItem } from "@/utils/types";
 import Link from "next/link";
 import Pagination from "./components/Pagination";
 
 export default async function Home({searchParams}: {searchParams: {[key: string]: string}} ) {
   const page = parseInt(searchParams['page'] ?? '1');
-  const news = await getNews(page);
+  let news;
+  if (searchParams['search']) {
+    news = await searchNews(searchParams['search'], page);
+  } else {
+    news = await getNews(page);
+  }
   return (
     <div className="container max-w-7xl mx-auto mt-5 w-full px-5">
       <Header />
