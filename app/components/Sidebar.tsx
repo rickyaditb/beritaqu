@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FaChevronLeft, FaGlobe, FaMedkit, FaMeh, FaMoneyBill, FaRocket, FaSadTear, FaSmileBeam, FaTags, FaVolleyballBall } from "react-icons/fa";
+import { FaMedkit, FaMeh, FaMoneyBill, FaRocket, FaSadTear, FaSmileBeam, FaVolleyballBall } from "react-icons/fa";
 
 export default function Sidebar() {
   return (

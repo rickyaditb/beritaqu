@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter } from 'next/navigation'
-import { FaChevronLeft, FaGlobe, FaMedkit, FaMeh, FaMoneyBill, FaRocket, FaSadTear, FaSmileBeam, FaTags, FaVolleyballBall } from "react-icons/fa";
+import { FaChevronLeft, FaGlobe, FaMeh, FaSadTear, FaSmileBeam, FaTags } from "react-icons/fa";
 
 export default function Sidebar({ source, category, sentiment }: { source: string, category: string, sentiment: string }) {
   const router = useRouter()

@@ -48,10 +48,10 @@ export default async function page({ params }: { params: NewsItem }) {
                 <img src={news.image} alt="" className="rounded" />
               </div>
               <div className="flex gap-4 mt-4 text-2xl md:text-xl lg:text-2xl">
-                <button className="bg-primary px-4 py-3 text-white font-bold flex items-center gap-3 rounded w-full justify-center">
+                <a href={news.link} target="_blank" className="bg-primary px-4 py-3 text-white font-bold flex items-center gap-3 rounded w-full justify-center">
                   <FaExternalLinkAlt />
                   <span>Sumber</span>
-                </button>
+                </a>
                 <button className="bg-primary px-4 py-3 text-white font-bold flex items-center gap-3 rounded w-full justify-center">
                   <FaBookmark />
                   <span>Simpan</span>
