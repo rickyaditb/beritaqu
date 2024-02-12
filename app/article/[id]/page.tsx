@@ -45,7 +45,7 @@ export default async function page({ params }: { params: NewsItem }) {
             </div>
             <div className="col-span-12 md:col-span-5 order-1 md:order-2">
               <div className="effect p-2 rounded">
-                <img src={news.image} alt="" className="rounded" />
+                <img src={news.image} alt="" className="rounded w-full" />
               </div>
               <div className="flex gap-4 mt-4 text-2xl md:text-xl lg:text-2xl">
                 <a href={news.link} target="_blank" className="bg-primary px-4 py-3 text-white font-bold flex items-center gap-3 rounded w-full justify-center">
