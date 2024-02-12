@@ -50,3 +50,19 @@ export async function searchNews(title: string, page: number) {
     throw err;
   }
 }
+
+export async function filterByCategory(category: string, page: number) {
+  const limit = 10;
+  const offset = (page - 1) * limit;
+  try {
+    const result = await pool.query(
+      'SELECT * FROM news WHERE category ILIKE $1 ORDER BY id DESC LIMIT $2 OFFSET $3',
+      [`%${category}%`, limit, offset]
+    )
+    return result.rows;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
+

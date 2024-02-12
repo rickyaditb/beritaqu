@@ -11,19 +11,25 @@ export default function Pagination() {
   const page = parseInt(searchParams.get('page') || '1');
 
   const prevPage = () => {
+    let url = `/?page=${page - 1}`;
     if (searchParams.get('search')) {
-      router.push(`/?page=${page - 1}&search=${searchParams.get('search')}`);
-    } else {
-      router.push(`/?page=${page - 1}`);
+      url += `&search=${searchParams.get('search')}`;
     }
+    if (searchParams.get('category')) {
+      url += `&category=${searchParams.get('category')}`;
+    }
+    router.push(url);
   };
 
   const nextPage = () => {
+    let url = `/?page=${page + 1}`;
     if (searchParams.get('search')) {
-      router.push(`/?page=${page + 1}&search=${searchParams.get('search')}`);
-    } else {
-      router.push(`/?page=${page + 1}`);
+      url += `&search=${searchParams.get('search')}`;
     }
+    if (searchParams.get('category')) {
+      url += `&category=${searchParams.get('category')}`;
+    }
+    router.push(url);
   };
   return (
     <nav className="mt-6">

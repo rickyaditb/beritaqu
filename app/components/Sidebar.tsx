@@ -8,7 +8,7 @@ export default function Sidebar() {
         <div className="effect text-center p-6 font-semibold">
           <p className="text-2xl text-secondary border-b-2 pb-3 mb-6">Kategori</p>
           <div className="gap-4 flex flex-col">
-            <button className="flex items-center gap-2 justify-center w-full text-primary">
+            <button className="flex items-center gap-2 justify-center w-full text-secondary">
               <FaVolleyballBall className="text-3xl shrink-0" />
               <span className="text-2xl">Olahraga</span>
             </button>
