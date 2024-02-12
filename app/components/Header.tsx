@@ -1,11 +1,12 @@
 "use client";
 
 import { useDebouncedCallback } from 'use-debounce';
-import { FaBookmark, FaCog, FaSearch } from "react-icons/fa";
-import { useRouter } from 'next/navigation';
+import { FaBookmark, FaChevronLeft, FaCog, FaSearch } from "react-icons/fa";
+import { useRouter, usePathname } from 'next/navigation';
 
 export default function Header() {
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleSearch = useDebouncedCallback((e: any) => {
     if (e.target.value === "") {
@@ -14,11 +15,18 @@ export default function Header() {
       router.push(`/?search=${e.target.value}`);
     }
   }, 1000);
+
   return (
     <header className="grid grid-cols-12 gap-3 mb-5">
-      <div className="p-6 effect col-span-6 lg:col-span-5 order-1">
-        <p className="text-primary text-4xl font-custom">Beritaku</p>
+      <div className={`p-6 effect col-span-6 lg:col-span-5 order-1 text-primary text-4xl font-custom lg:block ${pathname === "/" ? "block" : "hidden"}`} onClick={() => router.push('/')}>
+        Beritaku
       </div>
+      {pathname.startsWith('/article/') &&
+        <div className="p-6 effect col-span-6 lg:col-span-5 order-1 text-secondary text-2xl font-bold flex items-center justify-center gap-3 lg:hidden" onClick={() => router.back()}>
+          <FaChevronLeft />
+          Kembali
+        </div>
+      }
       <div className="pl-6 effect col-span-12 lg:col-span-5 order-4 lg:order-2 flex items-center">
         <FaSearch className="text-4xl text-secondary" />
         <input
