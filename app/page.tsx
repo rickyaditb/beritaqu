@@ -5,6 +5,7 @@ import { getNews, searchNews, filterByCategory } from "../utils/database";
 import { NewsItem } from "@/utils/types";
 import Link from "next/link";
 import Pagination from "./components/Pagination";
+import Footer from "./components/Footer";
 
 export default async function Home({searchParams}: {searchParams: {[key: string]: string}} ) {
   const page = parseInt(searchParams['page'] ?? '1');
@@ -39,6 +40,7 @@ export default async function Home({searchParams}: {searchParams: {[key: string]
             ))}
           </div>
           <Pagination />
+          <Footer />
         </main>
       </div>
     </div>

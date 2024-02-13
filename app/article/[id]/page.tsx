@@ -4,6 +4,7 @@ import { getNewsById } from "@/utils/database";
 
 import { NewsItem } from "@/utils/types";
 import { FaBookmark, FaExternalLinkAlt, FaGlobe, FaMeh, FaRegCalendarAlt, FaSadTear, FaSmileBeam, FaTags } from "react-icons/fa";
+import Footer from "@/app/components/Footer";
 
 export default async function page({ params }: { params: NewsItem }) {
   const news = await getNewsById(params.id);
@@ -91,6 +92,7 @@ export default async function page({ params }: { params: NewsItem }) {
               </div>
             </div>
           </div>
+          <Footer />
         </main>
       </div>
     </div>
