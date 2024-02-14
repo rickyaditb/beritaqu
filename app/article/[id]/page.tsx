@@ -11,6 +11,7 @@ export default async function page({ params }: { params: NewsItem }) {
   const formattedDate = news.time.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
   const shortDate = news.time.toLocaleDateString('id-ID', { day: 'numeric', month: 'long' });
   const parsedSentiment = parseFloat(news.sentiment);
+  let counter = 0;
   return (
     <div className="container max-w-7xl mx-auto mt-5 w-full px-5">
       <Header />
@@ -36,9 +37,9 @@ export default async function page({ params }: { params: NewsItem }) {
                   {news.summary.map((summaryItem: string, index: number) => (
                     <div key={index} className="flex gap-2 mt-3">
                       <div>
-                        <span className="bg-primary px-2 py-1 text-white font-bold rounded">{index + 1}</span>
+                        <span className={`bg-primary px-2 py-1 text-white font-bold rounded ${/^\s*-.*/.test(summaryItem) ? 'opacity-0' : counter++}`}>{counter}</span>
                       </div>
-                      <p>{summaryItem}</p>
+                      <p>{summaryItem.replace(/^\s*-*/, '')}</p>
                     </div>
                   ))}
                 </div>
