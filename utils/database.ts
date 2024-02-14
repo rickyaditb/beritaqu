@@ -35,57 +35,39 @@ export async function getNewsById(id: number) {
   }
 }
 
-export async function searchNews(title: string, page: number) {
+export async function filterNews(search: string, category: string, sentiment: string, page: number) {
   const limit = 10; // number of records per page
   const offset = (page - 1) * limit; // calculate offset
+  let query = 'SELECT * FROM news WHERE';
+  let params: (string | number)[] = [];
 
-  try {
-    const result = await pool.query(
-      'SELECT * FROM news WHERE title ILIKE $1 ORDER BY id DESC LIMIT $2 OFFSET $3',
-      [`%${title}%`, limit, offset]
-    );
-    return result.rows;
-  } catch (err) {
-    console.error(err);
-    throw err;
+  const sentimentMap: { [key: string]: string } = {
+    'positif': '>',
+    'negatif': '<',
+    'netral': '='
+  };
+
+  if (search) {
+    query += ` title ILIKE $${params.length + 1}`;
+    params.push(`%${search}%`);
   }
-}
 
-export async function filterByCategory(category: string, page: number) {
-  const limit = 10;
-  const offset = (page - 1) * limit;
-  try {
-    const result = await pool.query(
-      'SELECT * FROM news WHERE category ILIKE $1 ORDER BY id DESC LIMIT $2 OFFSET $3',
-      [`%${category}%`, limit, offset]
-    )
-    return result.rows;
-  } catch (err) {
-    console.error(err);
-    throw err;
+  if (category) {
+    query += (params.length ? ' AND' : '') + ` category ILIKE $${params.length + 1}`;
+    params.push(`%${category}%`);
   }
-}
 
-export async function filterBySentiment(sentiment: string, page: number) {
-  const limit = 10;
-  const offset = (page - 1) * limit;
-  try {
-    let query = '';
-    let params: number[] = [];
-
-    const sentimentMap: { [key: string]: string } = {
-      'positif': '>',
-      'negatif': '<',
-      'netral': '='
-    };
-    
+  if (sentiment) {
     const sentimentCondition = sentimentMap[sentiment.toLowerCase()];
-    
     if (sentimentCondition) {
-      query = `SELECT * FROM news WHERE sentiment ${sentimentCondition} 0 ORDER BY id DESC LIMIT $1 OFFSET $2`;
-      params = [limit, offset];
+      query += (params.length ? ' AND' : '') + ` sentiment ${sentimentCondition} 0`;
     }
+  }
 
+  query += ' ORDER BY id DESC LIMIT $' + (params.length + 1) + ' OFFSET $' + (params.length + 2);
+  params.push(limit, offset);
+
+  try {
     const result = await pool.query(query, params);
     return result.rows;
   } catch (err) {
@@ -93,4 +75,3 @@ export async function filterBySentiment(sentiment: string, page: number) {
     throw err;
   }
 }
-
