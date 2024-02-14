@@ -1,20 +1,22 @@
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Card from "./components/Card";
-import { getNews, searchNews, filterByCategory } from "../utils/database";
+import { getNews, searchNews, filterByCategory, filterBySentiment } from "../utils/database";
 import { NewsItem } from "@/utils/types";
 import Link from "next/link";
 import Pagination from "./components/Pagination";
 import Footer from "./components/Footer";
 
-export default async function Home({searchParams}: {searchParams: {[key: string]: string}} ) {
+export default async function Home({ searchParams }: { searchParams: { [key: string]: string } }) {
   const page = parseInt(searchParams['page'] ?? '1');
-  
+
   let news;
   if (searchParams['search']) {
     news = await searchNews(searchParams['search'], page);
   } else if (searchParams['category']) {
     news = await filterByCategory(searchParams['category'], page);
+  } else if (searchParams['sentiment']) {
+    news = await filterBySentiment(searchParams['sentiment'], page);
   } else {
     news = await getNews(page);
   }

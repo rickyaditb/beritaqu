@@ -66,3 +66,31 @@ export async function filterByCategory(category: string, page: number) {
   }
 }
 
+export async function filterBySentiment(sentiment: string, page: number) {
+  const limit = 10;
+  const offset = (page - 1) * limit;
+  try {
+    let query = '';
+    let params: number[] = [];
+
+    const sentimentMap: { [key: string]: string } = {
+      'positif': '>',
+      'negatif': '<',
+      'netral': '='
+    };
+    
+    const sentimentCondition = sentimentMap[sentiment.toLowerCase()];
+    
+    if (sentimentCondition) {
+      query = `SELECT * FROM news WHERE sentiment ${sentimentCondition} 0 ORDER BY id DESC LIMIT $1 OFFSET $2`;
+      params = [limit, offset];
+    }
+
+    const result = await pool.query(query, params);
+    return result.rows;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
+
