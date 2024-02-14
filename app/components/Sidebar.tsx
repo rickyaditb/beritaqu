@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { FaMedkit, FaMeh, FaMoneyBill, FaRocket, FaSadTear, FaSmileBeam, FaVolleyballBall } from "react-icons/fa";
+import { FaMedkit, FaMeh, FaMoneyBill, FaRocket, FaSadTear, FaSmileBeam, FaTimes, FaTimesCircle, FaVolleyballBall } from "react-icons/fa";
 
 export default function Sidebar() {
   const router = useRouter();
@@ -13,14 +13,29 @@ export default function Sidebar() {
 
   const handleFilter = (filterType: string, keyword: string) => {
     if (filterType === 'category') {
-      setActiveCategory(keyword);
+      if (activeCategory === keyword) {
+        setActiveCategory('');
+        keyword = '';
+      } else {
+        setActiveCategory(keyword);
+      }
     } else if (filterType === 'sentiment') {
-      setActiveSentiment(keyword);
+      if (activeSentiment === keyword) {
+        setActiveSentiment('');
+        keyword = '';
+      } else {
+        setActiveSentiment(keyword);
+      }
     }
-  
+
     const currentQueryParams = new URLSearchParams(window.location.search);
+    console.log(searchParams);
     currentQueryParams.set(filterType, keyword);
-  
+    if (keyword === '') {
+      currentQueryParams.delete(filterType);
+    } else {
+      currentQueryParams.set(filterType, keyword);
+    }
     router.push(`/?${currentQueryParams.toString()}`);
   }
 
