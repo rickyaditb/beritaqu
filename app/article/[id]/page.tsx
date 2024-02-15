@@ -6,6 +6,13 @@ import { NewsItem } from "@/utils/types";
 import { FaBookmark, FaExternalLinkAlt, FaGlobe, FaMeh, FaRegCalendarAlt, FaSadTear, FaSmileBeam, FaTags } from "react-icons/fa";
 import Footer from "@/app/components/Footer";
 
+export async function generateMetadata({ params }: { params: NewsItem }) {
+  const news = await getNewsById(params.id);
+  return {
+    title: `${news.source} | ${news.title}`,
+  }
+}
+
 export default async function page({ params }: { params: NewsItem }) {
   const news = await getNewsById(params.id);
   const formattedDate = news.time.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
