@@ -5,6 +5,7 @@ import { getNewsById } from "@/utils/database";
 import { NewsItem } from "@/utils/types";
 import { FaBookmark, FaExternalLinkAlt, FaGlobe, FaMeh, FaRegCalendarAlt, FaSadTear, FaSmileBeam, FaTags } from "react-icons/fa";
 import Footer from "@/app/components/Footer";
+import Link from "next/link";
 
 export async function generateMetadata({ params }: { params: NewsItem }) {
   const news = await getNewsById(params.id);
@@ -67,31 +68,31 @@ export default async function page({ params }: { params: NewsItem }) {
                 </button>
               </div>
               <div className="grid md:hidden grid-cols-2 gap-3 mt-3">
-                <div className="effect p-4 flex items-center gap-3">
-                  <FaGlobe className="text-4xl bg-primary p-2 rounded text-white shrink-0" />
+                <Link className="effect p-4 flex items-center gap-3" href={`/?source=${news.source}`}>
+                  <FaGlobe className="text-4xl bg-primary p-2 rounded text-white shrink-0"/>
                   <p className="text-secondary text-xl xl:text-2xl font-semibold">{news.source}</p>
-                </div>
-                <div className="effect p-4 flex items-center gap-3">
-                  <FaTags className="text-4xl bg-blue-400 p-2 rounded text-white shrink-0" />
+                </Link>
+                <Link className="effect p-4 flex items-center gap-3" href={`/?category=${news.category}`}>
+                  <FaTags className="text-4xl bg-blue-400 p-2 rounded text-white shrink-0"/>
                   <p className="text-secondary text-xl xl:text-2xl font-semibold">{news.category}</p>
-                </div>
+                </Link>
                 {parsedSentiment > 0 && (
-                  <div className="effect p-4 flex items-center gap-3">
+                  <Link className="effect p-4 flex items-center gap-3" href={`/?sentiment=positif`}>
                     <FaSmileBeam className="text-4xl bg-green-400 p-2 rounded text-white shrink-0" />
                     <p className="text-secondary text-xl xl:text-2xl font-semibold">Positif</p>
-                  </div>
+                  </Link>
                 )}
                 {parsedSentiment === 0 && (
-                  <div className="effect p-4 flex items-center gap-3">
+                  <Link className="effect p-4 flex items-center gap-3" href={`/?sentiment=netral`}>
                     <FaMeh className="text-4xl bg-gray-400 p-2 rounded text-white" />
                     <p className="text-secondary text-2xl font-semibold">Netral</p>
-                  </div>
+                  </Link>
                 )}
                 {parsedSentiment < 0 && (
-                  <div className="effect p-4 flex items-center gap-3">
+                  <Link className="effect p-4 flex items-center gap-3" href={`/?sentiment=negatif`}>
                     <FaSadTear className="text-4xl bg-red-400 p-2 rounded text-white" />
                     <p className="text-secondary text-2xl font-semibold">Negatif</p>
-                  </div>
+                  </Link>
                 )}
                 <div className="effect p-4 flex items-center gap-3">
                   <FaGlobe className="text-4xl bg-primary p-2 rounded text-white shrink-0" />
