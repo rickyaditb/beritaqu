@@ -35,7 +35,7 @@ export async function getNewsById(id: number) {
   }
 }
 
-export async function filterNews(search: string, category: string, sentiment: string, page: number) {
+export async function filterNews(search: string, category: string, source: string, sentiment: string, page: number) {
   const limit = 10; // number of records per page
   const offset = (page - 1) * limit; // calculate offset
   let query = 'SELECT * FROM news WHERE';
@@ -55,6 +55,11 @@ export async function filterNews(search: string, category: string, sentiment: st
   if (category) {
     query += (params.length ? ' AND' : '') + ` category ILIKE $${params.length + 1}`;
     params.push(`%${category}%`);
+  }
+
+  if (source) {
+    query += (params.length ? ' AND' : '') + ` source ILIKE $${params.length + 1}`;
+    params.push(`%${source}%`);
   }
 
   if (sentiment) {

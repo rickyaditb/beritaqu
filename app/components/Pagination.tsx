@@ -18,12 +18,15 @@ export default function Pagination() {
     if (searchParams.get('category')) {
       url += `&category=${searchParams.get('category')}`;
     }
+    if (searchParams.get('source')) {
+      url += `&source=${searchParams.get('source')}`;
+    }
     if (searchParams.get('sentiment')) {
       url += `&sentiment=${searchParams.get('sentiment')}`;
     }
     router.push(url);
   };
-  
+
   return (
     <nav className="mt-6">
       <div className="flex gap-3 justify-center text-primary">

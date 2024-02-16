@@ -11,8 +11,8 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
   const page = parseInt(searchParams['page'] ?? '1');
 
   let news;
-  if (searchParams['search'] || searchParams['category'] || searchParams['sentiment']) {
-    news = await filterNews(searchParams['search'], searchParams['category'], searchParams['sentiment'], page);
+  if (searchParams['search'] || searchParams['category'] || searchParams['source'] || searchParams['sentiment']) {
+    news = await filterNews(searchParams['search'], searchParams['category'], searchParams['source'], searchParams['sentiment'], page);
   } else {
     news = await getNews(page);
   }
