@@ -23,7 +23,7 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
         <Sidebar />
         <main className="col-span-6 lg:col-span-5 lg:pl-5">
           <div className="grid md:grid-cols-2 gap-5">
-            {news.map((item: NewsItem) => (
+            {news.rows.map((item: NewsItem) => (
               <Link href={`/article/${item.id}`} key={item.id}>
                 <Card
                   id={item.id}
@@ -37,7 +37,7 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
               </Link>
             ))}
           </div>
-          <Pagination />
+          <Pagination hasNextPage={news.hasNextPage} />
           <Footer />
         </main>
       </div>

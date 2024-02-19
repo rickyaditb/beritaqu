@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation'
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-export default function Pagination() {
+export default function Pagination({hasNextPage}: {hasNextPage: boolean}) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -36,7 +36,7 @@ export default function Pagination() {
         <div className="effect text-2xl py-3 px-5 font-bold">
           {page}
         </div>
-        <button className="effect text-2xl p-3" onClick={() => changePage(1)}>
+        <button className={`effect text-2xl p-3 ${!hasNextPage && "opacity-40"}`} onClick={() => changePage(1)} disabled={!hasNextPage}>
           <FaChevronRight />
         </button>
       </div>

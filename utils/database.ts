@@ -13,8 +13,12 @@ export async function getNews(page: number) {
   const offset = (page - 1) * limit; // calculate offset
 
   try {
-    const result = await pool.query('SELECT * FROM news ORDER BY id DESC LIMIT $1 OFFSET $2', [limit, offset]);
-    return result.rows;
+    const result = await pool.query('SELECT * FROM news ORDER BY id DESC LIMIT $1 OFFSET $2', [limit + 1, offset]);
+    const hasNextPage = result.rows.length > limit;
+    if (hasNextPage) {
+      result.rows.pop();
+    }
+    return { rows: result.rows, hasNextPage };
   } catch (err) {
     console.error(err);
     throw err;
@@ -70,11 +74,15 @@ export async function filterNews(search: string, category: string, source: strin
   }
 
   query += ' ORDER BY id DESC LIMIT $' + (params.length + 1) + ' OFFSET $' + (params.length + 2);
-  params.push(limit, offset);
+  params.push(limit + 1, offset);
 
   try {
     const result = await pool.query(query, params);
-    return result.rows;
+    const hasNextPage = result.rows.length > limit;
+    if (hasNextPage) {
+      result.rows.pop();
+    }
+    return { rows: result.rows, hasNextPage };
   } catch (err) {
     console.error(err);
     throw err;
