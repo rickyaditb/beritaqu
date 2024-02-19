@@ -9,10 +9,10 @@ import Footer from "./components/Footer";
 
 export default async function Home({ searchParams }: { searchParams: { [key: string]: string } }) {
   const page = parseInt(searchParams['page'] ?? '1');
-
+  const { search, category, source, sentiment } = searchParams;
   let news;
-  if (searchParams['search'] || searchParams['category'] || searchParams['source'] || searchParams['sentiment']) {
-    news = await filterNews(searchParams['search'], searchParams['category'], searchParams['source'], searchParams['sentiment'], page);
+  if (search || category || source || sentiment)  {
+    news = await filterNews(search, category, source, sentiment, page);
   } else {
     news = await getNews(page);
   }
