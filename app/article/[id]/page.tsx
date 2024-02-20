@@ -1,7 +1,7 @@
 import Header from "@/app/components/Header";
 import Sidebar from "./Sidebar";
 import { getNewsById } from "@/utils/database";
-
+import { redirect } from "next/navigation";
 import { NewsItem } from "@/utils/types";
 import { FaBookmark, FaExternalLinkAlt, FaGlobe, FaMeh, FaRegCalendarAlt, FaSadTear, FaSmileBeam, FaTags } from "react-icons/fa";
 import Footer from "@/app/components/Footer";
@@ -15,7 +15,13 @@ export async function generateMetadata({ params }: { params: NewsItem }) {
 }
 
 export default async function page({ params }: { params: NewsItem }) {
-  const news = await getNewsById(params.id);
+  let news;
+  try {
+    news = await getNewsById(params.id);
+  } catch (error) {
+    redirect('/not-found');
+  }
+  
   const formattedDate = news.time.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
   const shortDate = news.time.toLocaleDateString('id-ID', { day: 'numeric', month: 'long' });
   const parsedSentiment = parseFloat(news.sentiment);
