@@ -2,7 +2,8 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { FaMedkit, FaMeh, FaMoneyBill, FaRocket, FaSadTear, FaSmileBeam, FaTimes, FaTimesCircle, FaVolleyballBall } from "react-icons/fa";
+import { FaFilter, FaGlobe, FaMedkit, FaMeh, FaMoneyBill, FaRocket, FaSadTear, FaSmileBeam, FaTimes, FaTimesCircle, FaVolleyballBall } from "react-icons/fa";
+import Source from "./Source";
 
 export default function Sidebar() {
   const router = useRouter();
@@ -42,6 +43,7 @@ export default function Sidebar() {
   return (
     <aside className="hidden lg:block">
       <div className="flex flex-col gap-3">
+        <Source />
         <div className="effect text-center p-6 font-semibold">
           <p className="text-2xl text-secondary border-b-2 pb-3 mb-6">Kategori</p>
           <div className="gap-4 flex flex-col">
