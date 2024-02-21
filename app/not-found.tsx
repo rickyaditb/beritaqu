@@ -1,5 +1,10 @@
+import { Metadata } from 'next'
 import Link from 'next/link'
 import { FaHome } from 'react-icons/fa'
+
+export const metadata: Metadata = {
+  title: 'Terjadi Kesalahan | Error 404',
+}
 
 export default function NotFound() {
   return (
