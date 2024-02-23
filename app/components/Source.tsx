@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaGlobe } from "react-icons/fa";
 
 export default function Source() {
   const [modal, setModal] = useState(false);
+  const [tempSource, setTempSource] = useState([] as string[]);
+  const [savedSource, setSavedSource] = useState([] as string[]);
 
   const handleModal = (bool: Boolean) => {
     if (bool) {
@@ -13,80 +15,87 @@ export default function Source() {
       setModal(false);
     }
   }
+
+  const handleClick = (buttonSource: string) => {
+    if (tempSource.includes(buttonSource)) {
+      setTempSource(tempSource.filter((id) => id !== buttonSource));
+    } else {
+      setTempSource((prevTempSource) => [...prevTempSource, buttonSource]);
+    }
+  }
+
+  const handleSave = () => {
+    setSavedSource(tempSource);
+    handleModal(false)
+  };
+
   return (
     <>
       <div className={`bg-black/60 fixed inset-0 z-10 justify-center items-center ${modal ? 'flex' : 'hidden'}`}>
         <div className="effect p-5 text-center relative w-5/12">
           <p className="font-bold text-2xl text-secondary">Sumber Berita</p>
-          <p className="text-secondary text-xl mt-1">Menampilkan Berita Dari Seluruh Sumber</p>
+          <p className="text-secondary text-xl mt-1">Menampilkan Berita Dari {tempSource.length === 0 || tempSource.length === 9 ? 'Seluruh' : tempSource.length} Sumber</p>
           <div className="mt-5 flex flex-wrap gap-3 justify-center">
             <div>
-              <input type="checkbox" name="source" id="Antara" value="Antara" className="hidden peer" />
-              <label htmlFor="Antara" className="inline-block bg-secondary peer-checked:bg-pink-500 px-4 py-3 select-none text-white font-bold text-xl rounded cursor-pointer">
+              <button className={`inline-block ${tempSource.includes('Antara') ? 'bg-pink-500' : 'bg-secondary'} px-4 py-3 select-none text-white font-bold text-xl rounded cursor-pointer`} onClick={() => handleClick('Antara')}>
                 Antara
-              </label>
+              </button>
             </div>
             <div>
-              <input type="checkbox" name="source" id="CNN" value="CNN" className="hidden peer" />
-              <label htmlFor="CNN" className="inline-block bg-secondary peer-checked:bg-red-500 px-4 py-3 select-none text-white font-bold text-xl rounded cursor-pointer">
+              <button className={`inline-block ${tempSource.includes('CNN') ? 'bg-red-500' : 'bg-secondary'} px-4 py-3 select-none text-white font-bold text-xl rounded cursor-pointer`} onClick={() => handleClick('CNN')}>
                 CNN
-              </label>
+              </button>
             </div>
             <div>
-              <input type="checkbox" name="source" id="CNBC" value="CNBC" className="hidden peer" />
-              <label htmlFor="CNBC" className="inline-block bg-secondary peer-checked:bg-blue-500 px-4 py-3 select-none text-white font-bold text-xl rounded cursor-pointer">
+              <button className={`inline-block ${tempSource.includes('CNBC') ? 'bg-blue-500' : 'bg-secondary'} px-4 py-3 select-none text-white font-bold text-xl rounded cursor-pointer`} onClick={() => handleClick('CNBC')}>
                 CNBC
-              </label>
+              </button>
             </div>
             <div>
-              <input type="checkbox" name="source" id="Republika" value="Republika" className="hidden peer" />
-              <label htmlFor="Republika" className="inline-block bg-secondary peer-checked:bg-green-500 px-4 py-3 select-none text-white font-bold text-xl rounded cursor-pointer">
+              <button className={`inline-block ${tempSource.includes('Republika') ? 'bg-green-500' : 'bg-secondary'} px-4 py-3 select-none text-white font-bold text-xl rounded cursor-pointer`} onClick={() => handleClick('Republika')}>
                 Republika
-              </label>
+              </button>
             </div>
             <div>
-              <input type="checkbox" name="source" id="Okezone" value="Okezone" className="hidden peer" />
-              <label htmlFor="Okezone" className="inline-block bg-secondary peer-checked:bg-yellow-500 px-4 py-3 select-none text-white font-bold text-xl rounded cursor-pointer">
+              <button className={`inline-block ${tempSource.includes('Okezone') ? 'bg-yellow-500' : 'bg-secondary'} px-4 py-3 select-none text-white font-bold text-xl rounded cursor-pointer`} onClick={() => handleClick('Okezone')}>
                 Okezone
-              </label>
+              </button>
             </div>
             <div>
-              <input type="checkbox" name="source" id="Kumparan" value="Kumparan" className="hidden peer" />
-              <label htmlFor="Kumparan" className="inline-block bg-secondary peer-checked:bg-purple-500 px-4 py-3 select-none text-white font-bold text-xl rounded cursor-pointer">
+              <button className={`inline-block ${tempSource.includes('Kumparan') ? 'bg-purple-500' : 'bg-secondary'} px-4 py-3 select-none text-white font-bold text-xl rounded cursor-pointer`} onClick={() => handleClick('Kumparan')}>
                 Kumparan
-              </label>
+              </button>
             </div>
             <div>
-              <input type="checkbox" name="source" id="Vice" value="Vice" className="hidden peer" />
-              <label htmlFor="Vice" className="inline-block bg-secondary peer-checked:bg-gray-500 px-4 py-3 select-none text-white font-bold text-xl rounded cursor-pointer">
+              <button className={`inline-block ${tempSource.includes('Vice') ? 'bg-gray-500' : 'bg-secondary'} px-4 py-3 select-none text-white font-bold text-xl rounded cursor-pointer`} onClick={() => handleClick('Vice')}>
                 Vice
-              </label>
+              </button>
             </div>
             <div>
-              <input type="checkbox" name="source" id="Suara" value="Suara" className="hidden peer" />
-              <label htmlFor="Suara" className="inline-block bg-secondary peer-checked:bg-rose-500 px-4 py-3 select-none text-white font-bold text-xl rounded cursor-pointer">
+              <button className={`inline-block ${tempSource.includes('Suara') ? 'bg-rose-500' : 'bg-secondary'} px-4 py-3 select-none text-white font-bold text-xl rounded cursor-pointer`} onClick={() => handleClick('Suara')}>
                 Suara
-              </label>
+              </button>
             </div>
             <div>
-              <input type="checkbox" name="source" id="VOA" value="VOA" className="hidden peer" />
-              <label htmlFor="VOA" className="inline-block bg-secondary peer-checked:bg-orange-500 px-4 py-3 select-none text-white font-bold text-xl rounded cursor-pointer">
+              <button className={`inline-block ${tempSource.includes('VOA') ? 'bg-orange-500' : 'bg-secondary'} px-4 py-3 select-none text-white font-bold text-xl rounded cursor-pointer`} onClick={() => handleClick('VOA')}>
                 VOA
-              </label>
+              </button>
             </div>
           </div>
           <div className="mt-5 flex gap-3 justify-center">
             <button className="bg-red-400 text-white px-7 py-3 text-xl font-bold rounded" onClick={() => handleModal(false)}>Batal</button>
-            <button className="bg-primary text-white px-4 py-3 text-xl font-bold rounded" onClick={() => handleModal(false)}>Simpan</button>
+            <button className="bg-primary text-white px-4 py-3 text-xl font-bold rounded" onClick={handleSave}>Simpan</button>
           </div>
         </div>
       </div>
       <button className="bg-primary text-white font-bold p-3 rounded flex justify-center items-center text-2xl" onClick={() => handleModal(true)}>
         <FaGlobe className="mt-0.5 mr-2 hidden xl:block" />
         <span>Sumber</span>
+        {savedSource.length !== 0 && savedSource.length !== 9 && // Fix: Changed '||' to '&&'
         <span className="mt-0.5 ml-4 bg-white text-primary rounded p-1 w-6 h-6 flex items-center justify-center text-lg">
-          3
+          {savedSource.length}
         </span>
+        }
       </button>
     </>
   )
