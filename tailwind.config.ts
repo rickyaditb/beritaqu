@@ -13,7 +13,7 @@ const config: Config = {
         "secondary": "#718096"
       },
       fontFamily: {
-        'custom': ['Pacifico', 'sans-serif'], // Add your font name here
+        'custom': ['Pacifico', 'sans-serif'],
       },
     },
   },

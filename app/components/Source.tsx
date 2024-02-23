@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaGlobe } from "react-icons/fa";
 
 export default function Source() {
@@ -91,7 +91,7 @@ export default function Source() {
       <button className="bg-primary text-white font-bold p-3 rounded flex justify-center items-center text-2xl" onClick={() => handleModal(true)}>
         <FaGlobe className="mt-0.5 mr-2 hidden xl:block" />
         <span>Sumber</span>
-        {savedSource.length !== 0 && savedSource.length !== 9 && // Fix: Changed '||' to '&&'
+        {savedSource.length !== 0 && savedSource.length !== 9 &&
         <span className="mt-0.5 ml-4 bg-white text-primary rounded p-1 w-6 h-6 flex items-center justify-center text-lg">
           {savedSource.length}
         </span>

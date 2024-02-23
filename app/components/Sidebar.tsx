@@ -1,8 +1,8 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { FaFilter, FaGlobe, FaMedkit, FaMeh, FaMoneyBill, FaRocket, FaSadTear, FaSmileBeam, FaTimes, FaTimesCircle, FaVolleyballBall } from "react-icons/fa";
+import { useState } from "react";
+import { FaMedkit, FaMeh, FaMoneyBill, FaRocket, FaSadTear, FaSmileBeam, FaVolleyballBall } from "react-icons/fa";
 import Source from "./Source";
 
 export default function Sidebar() {

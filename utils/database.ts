@@ -9,8 +9,8 @@ const pool = new Pool({
 });
 
 export async function getNews(page: number) {
-  const limit = 10; // number of records per page
-  const offset = (page - 1) * limit; // calculate offset
+  const limit = 10;
+  const offset = (page - 1) * limit;
 
   try {
     const result = await pool.query('SELECT * FROM news ORDER BY id DESC LIMIT $1 OFFSET $2', [limit + 1, offset]);
@@ -40,8 +40,8 @@ export async function getNewsById(id: number) {
 }
 
 export async function filterNews(search: string, category: string, source: string, sentiment: string, page: number) {
-  const limit = 10; // number of records per page
-  const offset = (page - 1) * limit; // calculate offset
+  const limit = 10;
+  const offset = (page - 1) * limit;
   let query = 'SELECT * FROM news WHERE';
   let params: (string | number)[] = [];
 

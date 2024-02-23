@@ -1,6 +1,5 @@
 import { FaHome } from "react-icons/fa";
 import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
 import Link from "next/link";
 
