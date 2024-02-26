@@ -47,7 +47,7 @@ export async function filterNews(search: string, category: string, source: strin
 
   const sourceName = ['Antara', 'CNN', 'CNBC', 'Republika', 'Okezone', 'Kumparan', 'Vice', 'Suara', 'VOA']
 
-  const splitSource = source.split(' ').map(Number);
+  const splitSource = source ? source.split(' ').map(Number) : [];
   const mappedSource = splitSource.map(index => sourceName[index]);
 
   const sentimentMap: { [key: string]: string } = {
