@@ -43,7 +43,12 @@ export async function filterNews(search: string, category: string, source: strin
   const limit = 10;
   const offset = (page - 1) * limit;
   let query = 'SELECT * FROM news WHERE';
-  let params: (string | number)[] = [];
+  let params: (string | number | string[])[] = [];
+
+  const sourceName = ['Antara', 'CNN', 'CNBC', 'Republika', 'Okezone', 'Kumparan', 'Vice', 'Suara', 'VOA']
+
+  const splitSource = source.split(' ').map(Number);
+  const mappedSource = splitSource.map(index => sourceName[index]);
 
   const sentimentMap: { [key: string]: string } = {
     'positif': '>',
@@ -61,9 +66,9 @@ export async function filterNews(search: string, category: string, source: strin
     params.push(`%${category}%`);
   }
 
-  if (source) {
-    query += (params.length ? ' AND' : '') + ` source ILIKE $${params.length + 1}`;
-    params.push(`%${source}%`);
+  if (mappedSource.length) {
+    query += (params.length ? ' AND' : '') + ` source = ANY($${params.length + 1})`;
+    params.push(mappedSource);
   }
 
   if (sentiment) {

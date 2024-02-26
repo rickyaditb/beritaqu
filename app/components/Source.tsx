@@ -1,10 +1,18 @@
+import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaGlobe } from "react-icons/fa";
 
 export default function Source() {
+  const searchParams = useSearchParams();
+  const router = useRouter()
+
+  const sourceName = ['Antara', 'CNN', 'CNBC', 'Republika', 'Okezone', 'Kumparan', 'Vice', 'Suara', 'VOA'];
+  const activeSource = searchParams.get('source') || '';
+  const mappedSource = activeSource ? activeSource.split(' ').map(index => sourceName[Number(index)]) : [];
+
   const [modal, setModal] = useState(false);
-  const [tempSource, setTempSource] = useState([] as string[]);
-  const [savedSource, setSavedSource] = useState([] as string[]);
+  const [tempSource, setTempSource] = useState(mappedSource || [] as string[]);
+  const [savedSource, setSavedSource] = useState(mappedSource || [] as string[]);
 
   const handleModal = (bool: Boolean) => {
     if (bool) {
@@ -26,6 +34,18 @@ export default function Source() {
 
   const handleSave = () => {
     setSavedSource(tempSource);
+    const sourceIndices = tempSource.map(source => sourceName.indexOf(source)).join(' ');
+    let url = `/?&source=${sourceIndices}`;
+    if (searchParams.get('search')) {
+      url += `&search=${searchParams.get('search')}`;
+    }
+    if (searchParams.get('category')) {
+      url += `&category=${searchParams.get('category')}`;
+    }
+    if (searchParams.get('sentiment')) {
+      url += `&sentiment=${searchParams.get('sentiment')}`;
+    }
+    router.push(url);
     handleModal(false)
   };
 
@@ -92,9 +112,9 @@ export default function Source() {
         <FaGlobe className="mt-0.5 mr-2 hidden xl:block" />
         <span>Sumber</span>
         {savedSource.length !== 0 && savedSource.length !== 9 &&
-        <span className="mt-0.5 ml-4 bg-white text-primary rounded p-1 w-6 h-6 flex items-center justify-center text-lg">
-          {savedSource.length}
-        </span>
+          <span className="mt-0.5 ml-4 bg-white text-primary rounded p-1 w-6 h-6 flex items-center justify-center text-lg">
+            {savedSource.length}
+          </span>
         }
       </button>
     </>
