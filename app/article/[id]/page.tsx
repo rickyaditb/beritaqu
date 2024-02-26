@@ -21,6 +21,9 @@ export default async function page({ params }: { params: NewsItem }) {
   } catch (error) {
     redirect('/not-found');
   }
+
+  const sourceName = ['Antara', 'CNN', 'CNBC', 'Republika', 'Okezone', 'Kumparan', 'Vice', 'Suara', 'VOA'];
+  const sourceIndex = sourceName.indexOf(news.source)
   
   const formattedDate = news.time.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
   const shortDate = news.time.toLocaleDateString('id-ID', { day: 'numeric', month: 'long' });
@@ -74,7 +77,7 @@ export default async function page({ params }: { params: NewsItem }) {
                 </button>
               </div>
               <div className="grid md:hidden grid-cols-2 gap-3 mt-3">
-                <Link className="effect p-4 flex items-center gap-3" href={`/?source=${news.source}`}>
+                <Link className="effect p-4 flex items-center gap-3" href={`/?source=${sourceIndex}`}>
                   <FaGlobe className="text-4xl bg-primary p-2 rounded text-white shrink-0"/>
                   <p className="text-secondary text-xl xl:text-2xl font-semibold">{news.source}</p>
                 </Link>

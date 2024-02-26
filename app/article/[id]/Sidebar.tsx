@@ -7,6 +7,8 @@ import { FaChevronLeft, FaGlobe, FaMeh, FaSadTear, FaSmileBeam, FaTags } from "r
 export default function Sidebar({ source, category, sentiment }: { source: string, category: string, sentiment: string }) {
   const router = useRouter()
   const parsedSentiment = parseFloat(sentiment);
+  const sourceName = ['Antara', 'CNN', 'CNBC', 'Republika', 'Okezone', 'Kumparan', 'Vice', 'Suara', 'VOA'];
+  const sourceIndex = sourceName.indexOf(source)
   return (
     <aside className="hidden lg:block">
       <div className="flex flex-col gap-3">
@@ -14,7 +16,7 @@ export default function Sidebar({ source, category, sentiment }: { source: strin
           <FaChevronLeft />
           <span>Kembali</span>
         </button>
-        <Link className="effect p-4 flex items-center gap-3" href={`/?source=${source}`}>
+        <Link className="effect p-4 flex items-center gap-3" href={`/?source=${sourceIndex}`}>
           <FaGlobe className="text-4xl bg-primary p-2 rounded text-white shrink-0" />
           <p className="text-secondary text-xl xl:text-2xl font-semibold">{source}</p>
         </Link>
