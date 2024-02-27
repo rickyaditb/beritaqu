@@ -24,6 +24,7 @@ export default function Pagination({hasNextPage}: {hasNextPage: boolean}) {
     if (searchParams.get('sentiment')) {
       url += `&sentiment=${searchParams.get('sentiment')}`;
     }
+    router.prefetch(url)
     router.push(url);
   };
 
