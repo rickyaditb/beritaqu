@@ -20,7 +20,7 @@ export default function Header() {
 
   return (
     <header className="grid grid-cols-12 gap-3 mb-5">
-      <div className={`p-6 effect col-span-6 lg:col-span-5 order-1 text-primary text-4xl font-custom lg:block ${pathname === "/" ? "block" : "hidden"}`}>
+      <div className={`p-6 effect col-span-6 lg:col-span-5 order-1 text-primary text-4xl font-custom lg:block ${pathname === "/" || pathname === "/bookmark" ? "block" : "hidden"}`}>
         Beritaku
       </div>
       {pathname.startsWith('/article/') &&
