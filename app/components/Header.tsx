@@ -29,7 +29,7 @@ export default function Header() {
           Kembali
         </div>
       }
-      <div className="pl-6 effect col-span-12 lg:col-span-5 order-4 lg:order-2 flex items-center">
+      <div className={`pl-6 effect col-span-12 lg:col-span-5 order-4 lg:order-2 items-center lg:flex ${pathname === "/" || pathname === "/bookmark" ? "flex" : "hidden"}`}>
         <FaSearch className="text-4xl text-secondary" />
         <input
           onChange={(e) => handleSearch(e)}
