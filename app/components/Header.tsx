@@ -1,9 +1,10 @@
 "use client";
 
 import { useDebouncedCallback } from 'use-debounce';
-import { FaBookmark, FaChevronLeft, FaCog, FaSearch } from "react-icons/fa";
+import { FaBars, FaBookmark, FaChevronLeft, FaCog, FaFilter, FaSearch } from "react-icons/fa";
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
+import Drawer from './MobileFilter';
 
 export default function Header() {
   const router = useRouter();
@@ -33,6 +34,7 @@ export default function Header() {
         <input
           onChange={(e) => handleSearch(e)}
           type="text" name="" id="" placeholder="Cari Berita Disini" className="text-2xl w-full py-6 ml-5 border-none focus:outline-none rounded-lg" />
+        <Drawer />
       </div>
       <Link href="/bookmark" className="p-6 effect flex items-center justify-center col-span-3 lg:col-span-1 order-2 lg:order-3">
         <FaBookmark className="text-secondary text-4xl shrink-0" />
