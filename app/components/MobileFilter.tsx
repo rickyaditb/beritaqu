@@ -1,8 +1,51 @@
-import React from 'react'
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useState } from 'react'
 import { FaBars } from 'react-icons/fa'
 import { Drawer } from 'vaul';
 
 export default function MobileFilter() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const [tempCategory, setTempCategory] = useState(searchParams.get('category') || '' as string);
+  const [savedCategory, setSavedCategory] = useState(searchParams.get('category') || '' as string);
+
+  const [tempSentiment, setTempSentiment] = useState(searchParams.get('sentiment') || '' as string);
+  const [savedSentiment, setSavedSentiment] = useState(searchParams.get('sentiment') || '' as string);
+
+  const handleFilter = (filterType: string, keyword: string) => {
+    if (filterType === 'category') {
+      if (tempCategory === keyword) {
+        setTempCategory('');
+        keyword = '';
+      } else {
+        setTempCategory(keyword);
+      }
+    } else if (filterType === 'sentiment') {
+      if (tempSentiment === keyword) {
+        setTempSentiment('');
+        keyword = '';
+      } else {
+        setTempSentiment(keyword);
+      }
+    }
+  }
+
+  const handleSave = () => {
+    setSavedCategory(tempCategory);
+    setSavedSentiment(tempSentiment);
+
+    const currentQueryParams = new URLSearchParams(window.location.search);
+    currentQueryParams.set('category', tempCategory);
+    currentQueryParams.set('sentiment', tempSentiment);
+    router.push(`/?${currentQueryParams.toString()}`);
+  }
+
+  const handleCancel = () => {
+    setTempCategory(savedCategory);
+    setTempSentiment(savedSentiment);
+  }
+
   return (
     <Drawer.Root>
       <Drawer.Trigger>
@@ -44,38 +87,38 @@ export default function MobileFilter() {
           </div>
           <p className='font-bold text-secondary text-2xl mt-6'>Kategori Berita</p>
           <div className='mt-2 flex flex-wrap gap-2'>
-            <button className={`inline-block bg-secondary px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
+            <button onClick={() => handleFilter('category', 'olahraga')} className={`inline-block ${tempCategory === 'olahraga' ? 'bg-primary' : 'bg-secondary'} px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
               Olahraga
             </button>
-            <button className={`inline-block bg-secondary px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
+            <button onClick={() => handleFilter('category', 'ekonomi')} className={`inline-block ${tempCategory === 'ekonomi' ? 'bg-primary' : 'bg-secondary'} px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
               Ekonomi
             </button>
-            <button className={`inline-block bg-secondary px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
+            <button onClick={() => handleFilter('category', 'kesehatan')} className={`inline-block ${tempCategory === 'kesehatan' ? 'bg-primary' : 'bg-secondary'} px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
               Kesehatan
             </button>
-            <button className={`inline-block bg-secondary px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
+            <button onClick={() => handleFilter('category', 'teknologi')} className={`inline-block ${tempCategory === 'teknologi' ? 'bg-primary' : 'bg-secondary'} px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
               Teknologi
             </button>
           </div>
           <p className='font-bold text-secondary text-2xl mt-6'>Sentimen Berita</p>
           <div className='mt-2 flex flex-wrap gap-2'>
-            <button className={`inline-block bg-secondary px-5 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
+            <button onClick={() => handleFilter('sentiment', 'negatif')} className={`inline-block ${tempSentiment === 'negatif' ? 'bg-primary' : 'bg-secondary'} px-5 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
               Negatif
             </button>
-            <button className={`inline-block bg-secondary px-5 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
+            <button onClick={() => handleFilter('sentiment', 'netral')} className={`inline-block ${tempSentiment === 'netral' ? 'bg-primary' : 'bg-secondary'} px-5 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
               Netral
             </button>
-            <button className={`inline-block bg-secondary px-5 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
+            <button onClick={() => handleFilter('sentiment', 'positif')} className={`inline-block ${tempSentiment === 'positif' ? 'bg-primary' : 'bg-secondary'} px-5 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
               Positif
             </button>
           </div>
 
           <div className="mt-5 grid grid-cols-2 gap-3">
             <Drawer.Close>
-              <button className="bg-red-400 text-white py-3 text-xl font-bold rounded w-full">Batal</button>
+              <button className="bg-red-400 text-white py-3 text-xl font-bold rounded w-full" onClick={handleCancel}>Batal</button>
             </Drawer.Close>
             <Drawer.Close>
-              <button className="bg-primary text-white py-3 text-xl font-bold rounded w-full">Simpan</button>
+              <button className="bg-primary text-white py-3 text-xl font-bold rounded w-full" onClick={handleSave}>Simpan</button>
             </Drawer.Close>
           </div>
         </Drawer.Content>
