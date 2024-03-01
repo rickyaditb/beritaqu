@@ -7,11 +7,25 @@ export default function MobileFilter() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  const sourceName = ['Antara', 'CNN', 'CNBC', 'Republika', 'Okezone', 'Kumparan', 'Vice', 'Suara', 'VOA'];
+  const activeSource = searchParams.get('source') || '';
+  const mappedSource = activeSource ? activeSource.split(' ').map(index => sourceName[Number(index)]) : [];
+  const [tempSource, setTempSource] = useState(mappedSource || [] as string[]);
+  const [savedSource, setSavedSource] = useState(mappedSource || [] as string[]);
+
   const [tempCategory, setTempCategory] = useState(searchParams.get('category') || '' as string);
   const [savedCategory, setSavedCategory] = useState(searchParams.get('category') || '' as string);
 
   const [tempSentiment, setTempSentiment] = useState(searchParams.get('sentiment') || '' as string);
   const [savedSentiment, setSavedSentiment] = useState(searchParams.get('sentiment') || '' as string);
+
+  const handleSource = (buttonSource: string) => {
+    if (tempSource.includes(buttonSource)) {
+      setTempSource(tempSource.filter((id) => id !== buttonSource));
+    } else {
+      setTempSource((prevTempSource) => [...prevTempSource, buttonSource]);
+    }
+  }
 
   const handleFilter = (filterType: string, keyword: string) => {
     if (filterType === 'category') {
@@ -34,10 +48,12 @@ export default function MobileFilter() {
   const handleSave = () => {
     setSavedCategory(tempCategory);
     setSavedSentiment(tempSentiment);
+    setSavedSource(tempSource)
 
     const currentQueryParams = new URLSearchParams(window.location.search);
     currentQueryParams.set('category', tempCategory);
     currentQueryParams.set('sentiment', tempSentiment);
+    currentQueryParams.set('source', tempSource.map(source => sourceName.indexOf(source)).join(' '));
     router.push(`/?${currentQueryParams.toString()}`);
   }
 
@@ -57,31 +73,31 @@ export default function MobileFilter() {
           <button className='w-16 border-secondary border-2 mx-auto block mb-5'></button>
           <p className='font-bold text-secondary text-2xl'>Sumber Berita</p>
           <div className="flex flex-wrap mt-2 gap-2">
-            <button className={`inline-block bg-secondary px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
+            <button onClick={() => handleSource('Antara')} className={`inline-block ${tempSource.includes('Antara') ? 'bg-pink-500' : 'bg-secondary'} px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
               Antara
             </button>
-            <button className={`inline-block bg-secondary px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
+            <button onClick={() => handleSource('CNN')} className={`inline-block ${tempSource.includes('CNN') ? 'bg-red-500' : 'bg-secondary'} px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
               CNN
             </button>
-            <button className={`inline-block bg-secondary px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
+            <button onClick={() => handleSource('CNBC')} className={`inline-block ${tempSource.includes('CNBC') ? 'bg-blue-500' : 'bg-secondary'} px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
               CNBC
             </button>
-            <button className={`inline-block bg-secondary px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
+            <button onClick={() => handleSource('Republika')} className={`inline-block ${tempSource.includes('Republika') ? 'bg-green-500' : 'bg-secondary'} px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
               Republika
             </button>
-            <button className={`inline-block bg-secondary px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
+            <button onClick={() => handleSource('Okezone')} className={`inline-block ${tempSource.includes('Okezone') ? 'bg-yellow-500' : 'bg-secondary'} px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
               Okezone
             </button>
-            <button className={`inline-block bg-secondary px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
+            <button onClick={() => handleSource('Kumparan')} className={`inline-block ${tempSource.includes('Kumparan') ? 'bg-purple-500' : 'bg-secondary'} px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
               Kumparan
             </button>
-            <button className={`inline-block bg-secondary px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
+            <button onClick={() => handleSource('Vice')} className={`inline-block ${tempSource.includes('Vice') ? 'bg-gray-500' : 'bg-secondary'} px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
               Vice
             </button>
-            <button className={`inline-block bg-secondary px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
+            <button onClick={() => handleSource('Suara')} className={`inline-block ${tempSource.includes('Suara') ? 'bg-rose-500' : 'bg-secondary'} px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
               Suara
             </button>
-            <button className={`inline-block bg-secondary px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
+            <button onClick={() => handleSource('VOA')} className={`inline-block ${tempSource.includes('VOA') ? 'bg-orange-500' : 'bg-secondary'} px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
               VOA
             </button>
           </div>
