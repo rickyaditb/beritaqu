@@ -6,12 +6,13 @@ import { NewsItem } from "@/utils/types";
 import Link from "next/link";
 import Pagination from "./components/Pagination";
 import Footer from "./components/Footer";
+import Chips from "./components/Chips";
 
 export default async function Home({ searchParams }: { searchParams: { [key: string]: string } }) {
   const page = parseInt(searchParams['page'] ?? '1');
   const { search, category, source, sentiment } = searchParams;
   let news;
-  if (search || category || source || sentiment)  {
+  if (search || category || source || sentiment) {
     news = await filterNews(search, category, source, sentiment, page);
   } else {
     news = await getNews(page);
@@ -22,6 +23,7 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
       <div className="grid grid-cols-6">
         <Sidebar />
         <main className="col-span-6 lg:col-span-5 lg:pl-5">
+          <Chips />
           <div className="grid md:grid-cols-2 gap-5">
             {news.rows.map((item: NewsItem) => (
               <Link href={`/article/${item.id}`} key={item.id}>
