@@ -47,19 +47,19 @@ export default function Sidebar() {
         <div className="effect text-center p-6 font-semibold">
           <p className="text-2xl text-secondary border-b-2 pb-3 mb-6">Kategori</p>
           <div className="gap-4 flex flex-col">
-            <button className={`flex items-center gap-2 justify-center w-full ${activeCategory === 'olahraga' ? 'text-primary' : 'text-secondary'}`} onClick={() => handleFilter('category', 'olahraga')}>
+            <button className={`flex items-center gap-2 justify-center w-full ${activeCategory === 'Olahraga' ? 'text-primary' : 'text-secondary'}`} onClick={() => handleFilter('category', 'Olahraga')}>
               <FaVolleyballBall className="text-3xl shrink-0" />
               <span className="text-2xl">Olahraga</span>
             </button>
-            <button className={`flex items-center gap-2 justify-center w-full ${activeCategory === 'ekonomi' ? 'text-primary' : 'text-secondary'}`} onClick={() => handleFilter('category', 'ekonomi')}>
+            <button className={`flex items-center gap-2 justify-center w-full ${activeCategory === 'Ekonomi' ? 'text-primary' : 'text-secondary'}`} onClick={() => handleFilter('category', 'Ekonomi')}>
               <FaMoneyBill className="text-3xl shrink-0" />
               <span className="text-2xl">Ekonomi</span>
             </button>
-            <button className={`flex items-center gap-2 justify-center w-full ${activeCategory === 'kesehatan' ? 'text-primary' : 'text-secondary'}`} onClick={() => handleFilter('category', 'kesehatan')}>
+            <button className={`flex items-center gap-2 justify-center w-full ${activeCategory === 'Kesehatan' ? 'text-primary' : 'text-secondary'}`} onClick={() => handleFilter('category', 'Kesehatan')}>
               <FaMedkit className="text-3xl shrink-0" />
               <span className="text-2xl">Kesehatan</span>
             </button>
-            <button className={`flex items-center gap-2 justify-center w-full ${activeCategory === 'teknologi' ? 'text-primary' : 'text-secondary'}`} onClick={() => handleFilter('category', 'teknologi')}>
+            <button className={`flex items-center gap-2 justify-center w-full ${activeCategory === 'Teknologi' ? 'text-primary' : 'text-secondary'}`} onClick={() => handleFilter('category', 'Teknologi')}>
               <FaRocket className="text-3xl shrink-0" />
               <span className="text-2xl">Teknologi</span>
             </button>
@@ -68,15 +68,15 @@ export default function Sidebar() {
         <div className="effect text-center p-6 font-semibold">
           <p className="text-2xl text-secondary border-b-2 pb-3 mb-6">Sentimen</p>
           <div className="gap-4 flex flex-col">
-            <button className={`flex items-center gap-2 justify-center w-full ${activeSentiment === "positif" ? "text-green-500" : "text-secondary"}`} onClick={() => handleFilter('sentiment', 'positif')}>
+            <button className={`flex items-center gap-2 justify-center w-full ${activeSentiment === "Positif" ? "text-green-500" : "text-secondary"}`} onClick={() => handleFilter('sentiment', 'Positif')}>
               <FaSmileBeam className="text-3xl" />
               <span className="text-2xl">Positif</span>
             </button>
-            <button className={`flex items-center gap-2 justify-center w-full ${activeSentiment === "netral" ? "text-green-500" : "text-secondary"}`} onClick={() => handleFilter('sentiment', 'netral')}>
+            <button className={`flex items-center gap-2 justify-center w-full ${activeSentiment === "Netral" ? "text-green-500" : "text-secondary"}`} onClick={() => handleFilter('sentiment', 'Netral')}>
               <FaMeh className="text-3xl" />
               <span className="text-2xl">Netral</span>
             </button>
-            <button className={`flex items-center gap-2 justify-center w-full ${activeSentiment === "negatif" ? "text-green-500" : "text-secondary"}`} onClick={() => handleFilter('sentiment', 'negatif')}>
+            <button className={`flex items-center gap-2 justify-center w-full ${activeSentiment === "Negatif" ? "text-green-500" : "text-secondary"}`} onClick={() => handleFilter('sentiment', 'Negatif')}>
               <FaSadTear className="text-3xl shrink-0" />
               <span className="text-2xl">Negatif</span>
             </button>

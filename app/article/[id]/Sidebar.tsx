@@ -25,19 +25,19 @@ export default function Sidebar({ source, category, sentiment }: { source: strin
           <p className="text-secondary text-xl xl:text-2xl font-semibold">{category}</p>
         </Link>
         {parsedSentiment > 0 && (
-          <Link className="effect p-4 flex items-center gap-3" href={`/?sentiment=positif`}>
+          <Link className="effect p-4 flex items-center gap-3" href={`/?sentiment=Positif`}>
             <FaSmileBeam className="text-4xl bg-green-400 p-2 rounded text-white shrink-0" />
             <p className="text-secondary text-xl xl:text-2xl font-semibold">Positif</p>
           </Link>
         )}
         {parsedSentiment === 0 && (
-          <Link className="effect p-4 flex items-center gap-3" href={`/?sentiment=netral`}>
+          <Link className="effect p-4 flex items-center gap-3" href={`/?sentiment=Netral`}>
             <FaMeh className="text-4xl bg-gray-400 p-2 rounded text-white" />
             <p className="text-secondary text-2xl font-semibold">Netral</p>
           </Link>
         )}
         {parsedSentiment < 0 && (
-          <Link className="effect p-4 flex items-center gap-3" href={`/?sentiment=negatif`}>
+          <Link className="effect p-4 flex items-center gap-3" href={`/?sentiment=Negatif`}>
             <FaSadTear className="text-4xl bg-red-400 p-2 rounded text-white" />
             <p className="text-secondary text-2xl font-semibold">Negatif</p>
           </Link>

@@ -103,28 +103,28 @@ export default function MobileFilter() {
           </div>
           <p className='font-bold text-secondary text-2xl mt-6'>Kategori Berita</p>
           <div className='mt-2 flex flex-wrap gap-2'>
-            <button onClick={() => handleFilter('category', 'olahraga')} className={`inline-block ${tempCategory === 'olahraga' ? 'bg-primary' : 'bg-secondary'} px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
+            <button onClick={() => handleFilter('category', 'Olahraga')} className={`inline-block ${tempCategory === 'Olahraga' ? 'bg-primary' : 'bg-secondary'} px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
               Olahraga
             </button>
-            <button onClick={() => handleFilter('category', 'ekonomi')} className={`inline-block ${tempCategory === 'ekonomi' ? 'bg-primary' : 'bg-secondary'} px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
+            <button onClick={() => handleFilter('category', 'Ekonomi')} className={`inline-block ${tempCategory === 'Ekonomi' ? 'bg-primary' : 'bg-secondary'} px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
               Ekonomi
             </button>
-            <button onClick={() => handleFilter('category', 'kesehatan')} className={`inline-block ${tempCategory === 'kesehatan' ? 'bg-primary' : 'bg-secondary'} px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
+            <button onClick={() => handleFilter('category', 'Kesehatan')} className={`inline-block ${tempCategory === 'Kesehatan' ? 'bg-primary' : 'bg-secondary'} px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
               Kesehatan
             </button>
-            <button onClick={() => handleFilter('category', 'teknologi')} className={`inline-block ${tempCategory === 'teknologi' ? 'bg-primary' : 'bg-secondary'} px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
+            <button onClick={() => handleFilter('category', 'Teknologi')} className={`inline-block ${tempCategory === 'Teknologi' ? 'bg-primary' : 'bg-secondary'} px-3 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
               Teknologi
             </button>
           </div>
           <p className='font-bold text-secondary text-2xl mt-6'>Sentimen Berita</p>
           <div className='mt-2 flex flex-wrap gap-2'>
-            <button onClick={() => handleFilter('sentiment', 'negatif')} className={`inline-block ${tempSentiment === 'negatif' ? 'bg-primary' : 'bg-secondary'} px-5 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
+            <button onClick={() => handleFilter('sentiment', 'Negatif')} className={`inline-block ${tempSentiment === 'Negatif' ? 'bg-primary' : 'bg-secondary'} px-5 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
               Negatif
             </button>
-            <button onClick={() => handleFilter('sentiment', 'netral')} className={`inline-block ${tempSentiment === 'netral' ? 'bg-primary' : 'bg-secondary'} px-5 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
+            <button onClick={() => handleFilter('sentiment', 'Netral')} className={`inline-block ${tempSentiment === 'Netral' ? 'bg-primary' : 'bg-secondary'} px-5 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
               Netral
             </button>
-            <button onClick={() => handleFilter('sentiment', 'positif')} className={`inline-block ${tempSentiment === 'positif' ? 'bg-primary' : 'bg-secondary'} px-5 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
+            <button onClick={() => handleFilter('sentiment', 'Positif')} className={`inline-block ${tempSentiment === 'Positif' ? 'bg-primary' : 'bg-secondary'} px-5 py-2 select-none text-white font-bold text-lg rounded cursor-pointer`}>
               Positif
             </button>
           </div>
