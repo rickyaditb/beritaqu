@@ -4,7 +4,7 @@ import { useDebouncedCallback } from 'use-debounce';
 import { FaBars, FaBookmark, FaChevronLeft, FaCog, FaFilter, FaSearch } from "react-icons/fa";
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import Drawer from './MobileFilter';
+import MobileFilter from './MobileFilter';
 import { Suspense } from 'react';
 
 export default function Header() {
@@ -36,7 +36,7 @@ export default function Header() {
           onChange={(e) => handleSearch(e)}
           type="text" name="" id="" placeholder="Cari Berita Disini" className="text-2xl w-full py-6 ml-5 border-none focus:outline-none rounded-lg" />
         <Suspense>
-          <Drawer />
+          <MobileFilter />
         </Suspense>
       </div>
       <Link href="/bookmark" className="p-6 effect flex items-center justify-center col-span-3 lg:col-span-1 order-2 lg:order-3">
