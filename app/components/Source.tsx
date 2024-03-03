@@ -35,17 +35,18 @@ export default function Source() {
   const handleSave = () => {
     setSavedSource(tempSource);
     const sourceIndices = tempSource.map(source => sourceName.indexOf(source)).join(' ');
-    let url = `/?&source=${sourceIndices}`;
-    if (searchParams.get('search')) {
-      url += `&search=${searchParams.get('search')}`;
+    const currentQueryParams = new URLSearchParams(window.location.search);
+    currentQueryParams.set('source', sourceIndices ?? '');
+    if(searchParams.get('search')) {
+      currentQueryParams.set('search', searchParams.get('search') ?? '');
     }
-    if (searchParams.get('category')) {
-      url += `&category=${searchParams.get('category')}`;
+    if(searchParams.get('category')) {
+      currentQueryParams.set('category', searchParams.get('category') ?? '');
     }
-    if (searchParams.get('sentiment')) {
-      url += `&sentiment=${searchParams.get('sentiment')}`;
+    if(searchParams.get('sentiment')) {
+      currentQueryParams.set('sentiment', searchParams.get('sentiment') ?? '');
     }
-    router.push(url);
+    router.push(`/?${currentQueryParams.toString()}`);
     handleModal(false)
   };
 
