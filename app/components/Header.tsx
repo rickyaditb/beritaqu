@@ -1,7 +1,7 @@
 "use client";
 
 import { useDebouncedCallback } from 'use-debounce';
-import { FaBars, FaBookmark, FaChevronLeft, FaCog, FaFilter, FaSearch } from "react-icons/fa";
+import { FaBookmark, FaChevronLeft, FaCog, FaSearch } from "react-icons/fa";
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import MobileFilter from './MobileFilter';

@@ -30,7 +30,6 @@ export default function Sidebar() {
     }
 
     const currentQueryParams = new URLSearchParams(window.location.search);
-    console.log(searchParams);
     currentQueryParams.set(filterType, keyword);
     if (keyword === '') {
       currentQueryParams.delete(filterType);
