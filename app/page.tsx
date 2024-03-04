@@ -7,6 +7,7 @@ import Link from "next/link";
 import Pagination from "./components/Pagination";
 import Footer from "./components/Footer";
 import Chips from "./components/Chips";
+import Onboarding from "./components/Onboarding";
 
 export default async function Home({ searchParams }: { searchParams: { [key: string]: string } }) {
   const page = parseInt(searchParams['page'] ?? '1');
@@ -19,6 +20,7 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
   }
   return (
     <div className="container max-w-7xl mx-auto mt-5 w-full px-5">
+      <Onboarding />
       <Header />
       <div className="grid grid-cols-6">
         <Sidebar />
