@@ -20,7 +20,7 @@ export default function Onboarding() {
   const handleClick = () => {
     setIsVisible(false);
     localStorage.setItem('firstTime', 'false');
-    document.body.style.overflow = 'scroll';
+    document.body.style.overflow = 'auto';
   };
   return (
     <div className="bg-black/60 fixed inset-0 z-10 flex items-center justify-center md:px-10">
