@@ -5,11 +5,18 @@ import { FaBookmark, FaChevronLeft, FaCog, FaSearch } from "react-icons/fa";
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import MobileFilter from './MobileFilter';
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
+import Settings from './Settings';
 
 export default function Header() {
   const router = useRouter();
   const pathname = usePathname();
+
+  const [showSettings, setShowSettings] = useState(false);
+
+  const toggleSettings = () => {
+    setShowSettings(!showSettings);
+  };
 
   const handleSearch = useDebouncedCallback((e: any) => {
     if (e.target.value === "") {
@@ -42,9 +49,12 @@ export default function Header() {
       <Link href="/bookmark" className="p-6 effect flex items-center justify-center col-span-3 lg:col-span-1 order-2 lg:order-3">
         <FaBookmark className="text-secondary text-4xl shrink-0" />
       </Link>
-      <div className="p-6 effect flex items-center justify-center col-span-3 lg:col-span-1 order-3 lg:order-4">
+      <div
+        onClick={() => setShowSettings(true)}
+        className="p-6 effect flex items-center justify-center col-span-3 lg:col-span-1 order-3 lg:order-4">
         <FaCog className="text-secondary text-4xl shrink-0" />
       </div>
+      {showSettings && <Settings toggleSettings={toggleSettings} />}
     </header>
   )
 }
