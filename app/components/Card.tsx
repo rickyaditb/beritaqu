@@ -4,8 +4,8 @@ import { NewsItem } from "@/utils/types";
 export default function Card({ title, time, category, source, sentiment, image }: NewsItem) {
   const formattedDate = time.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
   return (
-    <article className="effect">
-      <div className="group bg-cover bg-center bg-no-repeat relative rounded-t-lg p-5" style={{ backgroundImage: `linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0) 25%), url('${image}')`, height: "250px" }}>
+    <article className="group effect transition hover:-translate-y-2 duration-300 overflow-hidden">
+      <div className="group-hover:scale-105 duration-300 transition bg-cover bg-center bg-no-repeat relative rounded-t-lg p-5" style={{ backgroundImage: `linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0) 25%), url('${image}')`, height: "250px" }}>
         <div className="flex justify-between group-hover:opacity-0 transition ease-in-out duration-300">
           <button className={`self-start ${source} px-4 py-1 font-bold text-white rounded text-2xl`}>{source}</button>
           {sentiment > 0 && (
